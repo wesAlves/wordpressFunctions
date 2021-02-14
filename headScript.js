@@ -49,7 +49,7 @@
 })();
 localStorage.clear();
 
-// TODO put all data on cache
+// TODO put all data on caches
 const cacheAvailable = "caches" in self;
 console.log(cacheAvailable);
 
