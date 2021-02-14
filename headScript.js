@@ -38,23 +38,23 @@
 //   localStorage.setItem("@PontoDoMalte:Destaques", JSON.stringify(data));
 // })();
 
-// (async () => {
-//   const response = await fetch(
-//     "http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=28&_embed"
-//   );
+(async () => {
+  const response = await fetch(
+    "http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=28&_embed"
+  );
 
-//   const data = await response.json();
+  const data = await response.json();
 
-//   localStorage.setItem("@PontoDoMalte:NovoMaltes", JSON.stringify(data));
-// })();
-// localStorage.clear();
+  localStorage.setItem("@PontoDoMalte:NovoMaltes", JSON.stringify(data));
+})();
+localStorage.clear();
 
-//TODO put all data on cache
-// const cacheAvailable = "caches" in self;
-// console.log(cacheAvailable);
+TODO put all data on cache
+const cacheAvailable = "caches" in self;
+console.log(cacheAvailable);
 
-// (async () => {
-//   const cache = await caches.open("pontoDoMalte");
-//   cache.add(new Request("data"));
-//   console.log(cache.keys);
-// })();
+(async () => {
+  const cache = await caches.open("pontoDoMalte");
+  cache.add(new Request("data"));
+  console.log(cache.keys);
+})();
