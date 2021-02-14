@@ -1,0 +1,68 @@
+leveduras = 45
+"acf": {
+
+    "descricao": "Embalagem em envelope de 11 g",
+    "laboratorio": "Red Star",
+    "tipo_de_fermentacao": "none",
+    "atenuacao": "none",
+    "floculacao": "none",
+    "preco_do_pacote": "13,45",
+    "foto_do_produto": null
+
+},
+
+lupulos = 29
+"acf": {
+
+    "descricao": "none",
+    "preco_do_pacote_50_g": "23,91",
+    "preco_do_pacote_de_200_g": null,
+    "alpha_acido": "none",
+    "aplicacao": "AR",
+    "total_de_oleos": "none",
+    "pais_de_origem": "Alemanha",
+    "foto_do_produto": null
+
+},
+
+maltes = 28
+"acf": {
+
+    "descricao": "Descrição do Malte Viena",
+    "preco_a_granel_kg": "14.5",
+    "preco_por_saca_25_kg": "317.09",
+    "cor_ebc": "07 – 09",
+    "foto_do_produto": "http://pontodomalte.com.br/wp-content/uploads/2018/03/01-1.jpg",
+    "potencial": "none",
+    "cor_srm": "none"
+
+},
+
+destaque = 31
+
+servicos = 48
+"acf": {
+
+    "descricao": "none",
+    "preco_do_produto": "120,00",
+    "foto_do_produto": null
+
+},
+
+equipamentos = 30
+"acf": {
+
+    "descricao": "Unidade",
+    "preco_do_produto": "75,00",
+    "foto_do_produto": null
+
+},
+
+insumos_diversos = 49
+"acf": {
+
+    "descricao": "none",
+    "preco_do_produto": "120,00",
+    "foto_do_produto": null
+
+},

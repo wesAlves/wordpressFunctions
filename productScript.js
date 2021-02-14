@@ -1,8 +1,5 @@
 const novoMaltes = JSON.parse(localStorage.getItem("@PontoDoMalte:NovoMaltes"));
 const showNovoMaltes = () => {
-  " ";
-};
-{
   novoMaltes.map((product) => {
     //console.log(product._embedded['wp:featuredmedia'][0].source_url)
 
@@ -51,5 +48,5 @@ const showNovoMaltes = () => {
     createProdcutNode.appendChild(createProdcutPrice_01);
     createProdcutNode.appendChild(createProdcutPrice_02);
   });
-}
+};
 showNovoMaltes();
