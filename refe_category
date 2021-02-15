@@ -66,3 +66,7 @@ insumos_diversos = 49
     "foto_do_produto": null
 
 },
+
+getting Headers
+
+      // console.log(getProductsByCategory.headers.get("link"));

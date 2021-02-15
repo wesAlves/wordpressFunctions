@@ -1,53 +1,103 @@
-// localStorage.clear();
-
 (async () => {
-  const getCategories = await fetch(
-    "http://pontodomalte.com.br/wp-json/wp/v2/categories?parent=27"
+  const requestCategories = new Request(
+    "http://pontodomalte.com.br/wp-json/wp/v2/categories?parent=27",
+    {
+      method: "GET",
+    }
   );
+
+  const getCategories = await fetch(requestCategories);
 
   const categoriesList = await getCategories.json();
 
   await categoriesList.map((category) => {
-    (async () => {
-      const getProductsByCategory = await fetch(
-        `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed`
-      );
+    const requestProducts = new Request(
+      `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed&per_page=16`,
+      {
+        method: "GET",
+      }
+    );
 
-      const productsResponse = await getProductsByCategory.json();
+    (async () => {
+      const getProductsByCategory = await fetch(requestProducts);
+
+      const productTotalQauntitie = getProductsByCategory.headers.get(
+        "x-wp-total"
+      );
 
       localStorage.setItem(
-        `@PontoDoMalte:${category.slug}`,
-        JSON.stringify(productsResponse)
+        `@PontoDoMalte:${category.slug}-totalQauntitie`,
+        JSON.stringify(productTotalQauntitie)
       );
+      // const productsResponse = await getProductsByCategory.json();
+
+      if (productTotalQauntitie / 16 >= 1) {
+        const totalPages = productTotalQauntitie / 16;
+
+        const pageNumber = Math.ceil(totalPages);
+
+        for (let i = 1; i <= pageNumber; i++) {
+          const currentPage = i;
+
+          (async () => {
+            const getProductsByCategoryPagination = await fetch(
+              `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed&per_page=16&page=${currentPage}`
+            );
+
+            const productsResponse = await getProductsByCategoryPagination.json();
+
+            // console.log(productsResponse);
+
+            localStorage.setItem(
+              `@PontoDoMalte:${category.slug}-page${currentPage}`,
+              JSON.stringify(productsResponse)
+            );
+          })();
+        }
+        return;
+      } else {
+        const productsResponse = await getProductsByCategory.json();
+
+        localStorage.setItem(
+          `@PontoDoMalte:${category.slug}-page1`,
+          JSON.stringify(productsResponse)
+        );
+      }
+      return;
       //   callMe(category.slug);
     })();
   });
 })();
 
-const callMe = (produto) => {
+const callMe = (produto, page) => {
   const createDivProdutc = (productName) => {
     const getDivProductContainer = document.getElementById(
       `containerProdutos_${productName}`
     );
+
     const createProductCardDiv = document.createElement("div");
     createProductCardDiv.classList.add(`${productName}`);
     createProductCardDiv.id = `${productName}`;
 
     getDivProductContainer.appendChild(createProductCardDiv);
 
-    showProductsList(productName, productName);
+    showProductsList(productName, productName, page);
   };
+
   createDivProdutc(produto);
 };
 
-const showProductsList = (produtoCategorias, divName) => {
+const showProductsList = (produtoCategorias, divName, page) => {
+  const divProd = document.getElementById(divName);
+  divProd.innerHTML = "";
+
+  // const productTotalQauntitie = 0;
+
   const getProdutoData = JSON.parse(
-    localStorage.getItem(`@PontoDoMalte:${produtoCategorias}`)
+    localStorage.getItem(`@PontoDoMalte:${produtoCategorias}-page${page}`)
   );
 
   getProdutoData.map((produtoCategoria) => {
-    const divProd = document.getElementById(divName);
-
     const classProduct = document.createAttribute("class");
     const classProductImage = document.createAttribute("class");
     const classProductPrice = document.createAttribute("class");
