@@ -1,0 +1,87 @@
+home
+
+<script>
+
+const destaqueList = JSON.parse(localStorage.getItem("@PontoDoMalte:Destaques"));
+
+const showDestaques = () => {
+  
+  destaqueList.map(product => {
+    const divProd = document.getElementById("destaques");
+	
+	const classProduct = document.createAttribute('class');
+	classProduct.value= "ProductCardList";
+	
+	const classProductImage = document.createAttribute('class');
+	classProductImage.value= "productImage";
+    
+    const classProductPrice = document.createAttribute('class');
+	classProductPrice.value= "ProductPrice";
+
+	const createProdcutNode = document.createElement('div');
+	createProdcutNode.attributes.setNamedItem(classProduct);
+
+	const createProdcutImageNode = document.createElement('div');
+	createProdcutImageNode.attributes.setNamedItem(classProductImage);
+	
+	const createTitle = document.createElement('h3');
+    createTitle.innerHTML = product.title.rendered;
+    
+	const createImg = document.createElement('img');
+	createImg.src = product._embedded['wp:featuredmedia'][0].source_url;
+	    
+	const createDescription = document.createElement('span');
+    createDescription.innerHTML = product.content.rendered;
+    
+    const createProdcutPrice = document.createElement('p');
+   	createProdcutPrice.attributes.setNamedItem(classProductPrice);
+	createProdcutPrice.innerHTML = product.meta.price;
+	    
+    divProd.appendChild(createProdcutNode);
+	createProdcutNode.appendChild(createProdcutImageNode);
+	
+	createProdcutImageNode.appendChild(createImg);
+
+	createProdcutNode.appendChild(createTitle);
+    //createProdcutNode.appendChild( createDescription);
+    createProdcutNode.appendChild(createProdcutPrice);
+            
+  })
+}
+
+showDestaques();
+
+</script>
+
+
+carousel
+
+<script>
+
+const divCarousel = document.getElementsByClassName('carousel');
+
+const carouselPrev = document.getElementsByClassName('carouselPrev');
+const carouselNext = document.getElementsByClassName('carouselNext');
+
+carouselPrev[0].onclick = function(){
+	if(divCarousel[0].offsetLeft >= -300){
+		divCarousel[0].style.marginLeft = '8px';
+		return
+	}
+	else{
+
+divCarousel[0].style.marginLeft = divCarousel[0].offsetLeft + 250 + 'px'	;
+	}
+
+}
+
+carouselNext[0].onclick = function(){
+	if(divCarousel[0].offsetLeft<= -1300){
+		divCarousel[0].style.marginLeft = "-1356px";
+		return
+	}
+
+ divCarousel[0].style.marginLeft = divCarousel[0].offsetLeft - 250 + 'px'	;
+}
+
+</script>
