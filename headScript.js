@@ -9,17 +9,28 @@
 
   await categoriesList.map((category) => {
     (async () => {
+      const localDataStorage = JSON.parse(
+        localStorage.getItem(`@PontoDoMalte:${category.slug}`)
+      );
+
       const getProductsByCategory = await fetch(
         `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed`
       );
 
       const productsResponse = await getProductsByCategory.json();
 
-      localStorage.setItem(
-        `@PontoDoMalte:${category.slug}`,
-        JSON.stringify(productsResponse)
-      );
-      //   callMe(category.slug);
+      if (
+        JSON.stringify(localDataStorage) === JSON.stringify(productsResponse)
+      ) {
+        return;
+      } else {
+        localStorage.setItem(
+          `@PontoDoMalte:${category.slug}`,
+          JSON.stringify(productsResponse)
+        );
+        setTimeout(location.reload(), 10);
+      }
+      // callMe(category.slug);
     })();
   });
 })();
