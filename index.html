@@ -9,16 +9,58 @@
     <!-- <link rel='stylesheet' id='child-style-css' href='https://wp.cerceja.space/wp-content/themes/Avada-child/style.css'
         type='text/css' media='all' /> -->
     <script src="./headScript.js"></script>
+    <script src="./paginagion_btn_func.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <div class='' id="containerProdutos_equipamentos">
+    <div id="menuProdutos">
+        This
     </div>
-    <button onclick="callMe('equipamentos', 15)">Pagination</button>
+    <!-- <div class='pagination_show_maltes'>
+    </div>
+
+    <div class='' id="containerProdutos_maltes">
+    </div>
+    <button onclick="paginationMaltes.prevPager('maltes')">antefiror</button>
+    <button onclick="paginationMaltes.nextPage('maltes')">próxima</button> -->
+
+    <div class='pagination_show_destaque'>
+    </div>
+
+    <div class='' id="containerProdutos_destaque">
+    </div>
+    <button onclick="paginationdestaque.prevPager('destaque')">antefiror</button>
+    <button onclick="paginationdestaque.nextPage('destaque')">próxima</button>
+    <!-- <button onclick="callMe('maltes', 3)">Pagination</button> -->
 </body>
 <script>
-    callMe('equipamentos', 1)
+    const paginationdestaque = new pagination('destaque');
+    // const paginationMaltes = new pagination('maltes');
+    // callMe('maltes', 1)
+    callMe('destaque', 1)
+    // console.log(categoriesForMenu);
+
+    const createMenuProducts = () => {
+
+        const menuDiv = document.getElementById("menuProdutos")
+
+        categoriesForMenu.map(categoria => {
+            console.log(categoria);
+            const productosMenuItem = document.createElement('INPUT');
+            productosMenuItem.setAttribute("type", "checkebox");
+            productosMenuItem.setAttribute('label', categoria)
+            // productosMenuItem.setAttribute("class", "selectMenu");
+
+            // menuDiv.appendChild(productosMenuItem);
+            // menuDiv.innerHTML = categoria
+            console.log(menuDiv)
+
+        })
+    }
+
+    createMenuProducts()
+
 </script>
 
 </html>

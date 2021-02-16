@@ -1,3 +1,5 @@
+const categoriesForMenu = [];
+
 (async () => {
   const requestCategories = new Request(
     "http://pontodomalte.com.br/wp-json/wp/v2/categories?parent=27",
@@ -11,8 +13,11 @@
   const categoriesList = await getCategories.json();
 
   await categoriesList.map((category) => {
+    categoriesForMenu.push(category.name);
+
     const requestProducts = new Request(
-      `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed&per_page=16`,
+      `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed&per_page=16
+      `,
       {
         method: "GET",
       }
@@ -25,11 +30,16 @@
         "x-wp-total"
       );
 
+      //TODO SET A TIME FOR RELOAD IF LOCAL IS NOT THE SAME AS REQUEST
+      // localStorage.getItem(`@PontoDoMalte:${category.slug}-totalQauntitie`) ===
+      // JSON.stringify(productTotalQauntitie)
+      //   ? null
+      //   : setTimeout(location.reload(), 10000);
+
       localStorage.setItem(
         `@PontoDoMalte:${category.slug}-totalQauntitie`,
         JSON.stringify(productTotalQauntitie)
       );
-      // const productsResponse = await getProductsByCategory.json();
 
       if (productTotalQauntitie / 16 >= 1) {
         const totalPages = productTotalQauntitie / 16;
@@ -45,8 +55,6 @@
             );
 
             const productsResponse = await getProductsByCategoryPagination.json();
-
-            // console.log(productsResponse);
 
             localStorage.setItem(
               `@PontoDoMalte:${category.slug}-page${currentPage}`,
@@ -64,7 +72,6 @@
         );
       }
       return;
-      //   callMe(category.slug);
     })();
   });
 })();
@@ -91,7 +98,18 @@ const showProductsList = (produtoCategorias, divName, page) => {
   const divProd = document.getElementById(divName);
   divProd.innerHTML = "";
 
-  // const productTotalQauntitie = 0;
+  const paginationDisplay = document.querySelector(
+    `.pagination_show_${divName}`
+  );
+
+  const qntProductCategoryPagination = JSON.parse(
+    localStorage.getItem(`@PontoDoMalte:${divName}-totalQauntitie`)
+  );
+  if (paginationDisplay !== null) {
+    paginationDisplay.innerHTML = `Monstrando grupo ${page} de ${Math.ceil(
+      qntProductCategoryPagination / 16
+    )}`;
+  }
 
   const getProdutoData = JSON.parse(
     localStorage.getItem(`@PontoDoMalte:${produtoCategorias}-page${page}`)
