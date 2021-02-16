@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div id="menuProdutos">
-        This
-    </div>
+
+    <ul id="menuProdutos">
+    </ul>
     <!-- <div class='pagination_show_maltes'>
     </div>
 
@@ -32,35 +32,20 @@
     </div>
     <button onclick="paginationdestaque.prevPager('destaque')">antefiror</button>
     <button onclick="paginationdestaque.nextPage('destaque')">próxima</button>
+    <!-- <button onclick="toggleHidden()">Mostrar / ocultar</button> -->
     <!-- <button onclick="callMe('maltes', 3)">Pagination</button> -->
 </body>
 <script>
     const paginationdestaque = new pagination('destaque');
-    // const paginationMaltes = new pagination('maltes');
-    // callMe('maltes', 1)
-    callMe('destaque', 1)
-    // console.log(categoriesForMenu);
 
-    const createMenuProducts = () => {
-
-        const menuDiv = document.getElementById("menuProdutos")
-
-        categoriesForMenu.map(categoria => {
-            console.log(categoria);
-            const productosMenuItem = document.createElement('INPUT');
-            productosMenuItem.setAttribute("type", "checkebox");
-            productosMenuItem.setAttribute('label', categoria)
-            // productosMenuItem.setAttribute("class", "selectMenu");
-
-            // menuDiv.appendChild(productosMenuItem);
-            // menuDiv.innerHTML = categoria
-            console.log(menuDiv)
-
-        })
-    }
-
-    createMenuProducts()
+    callMe('destaque', 1);
 
 </script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 
 </html>

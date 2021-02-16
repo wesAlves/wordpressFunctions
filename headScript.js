@@ -1,5 +1,3 @@
-const categoriesForMenu = [];
-
 (async () => {
   const requestCategories = new Request(
     "http://pontodomalte.com.br/wp-json/wp/v2/categories?parent=27",
@@ -8,12 +6,16 @@ const categoriesForMenu = [];
     }
   );
 
+  const categoriesNameForMenu = [];
+  const categoriesSlugForMenu = [];
+
   const getCategories = await fetch(requestCategories);
 
   const categoriesList = await getCategories.json();
 
   await categoriesList.map((category) => {
-    categoriesForMenu.push(category.name);
+    categoriesNameForMenu.push(category.name);
+    categoriesSlugForMenu.push(category.slug);
 
     const requestProducts = new Request(
       `http://pontodomalte.com.br/wp-json/wp/v2/produtos?categories=${category.id}&_embed&per_page=16
@@ -74,9 +76,11 @@ const categoriesForMenu = [];
       return;
     })();
   });
+
+  createMenuProducts(categoriesNameForMenu, categoriesSlugForMenu);
 })();
 
-const callMe = (produto, page) => {
+const callMe = (produto, page, callback = null) => {
   const createDivProdutc = (productName) => {
     const getDivProductContainer = document.getElementById(
       `containerProdutos_${productName}`
@@ -92,6 +96,9 @@ const callMe = (produto, page) => {
   };
 
   createDivProdutc(produto);
+  if (callback && typeof callback === "function") {
+    callback();
+  }
 };
 
 const showProductsList = (produtoCategorias, divName, page) => {
@@ -279,6 +286,69 @@ const showProductsList = (produtoCategorias, divName, page) => {
         produtoCategoria.acf.pais_de_origem !== "none" &&
           createProdcutNode.appendChild(createOrigin);
         break;
+    }
+  });
+};
+
+const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
+  const menuUL = document.getElementById("menuProdutos");
+
+  categoriesNameForMenu.map((categoria, index) => {
+    // console.log(categoria);
+    const titlePlace = document.getElementById(
+      `containerProdutos_${categoriesSlugForMenu[index]}`
+    );
+
+    const categoryTitle = document.createElement("H2");
+    const menuItem = document.createElement("LI");
+    const categoryMenuItem = document.createElement("INPUT");
+    const categoryMenuItemLabel = document.createElement("LABEL");
+    const label = document.createTextNode(` ${categoria}`);
+
+    categoryTitle.setAttribute("class", "categoryTitle");
+
+    menuItem.setAttribute("class", "selectMenu");
+
+    categoryMenuItem.setAttribute("type", "radio");
+    categoryMenuItem.setAttribute("id", categoria);
+    categoryMenuItem.setAttribute("value", categoria);
+    categoryMenuItem.setAttribute("name", "categoria");
+
+    categoryMenuItemLabel.setAttribute("for", categoria);
+
+    categoryTitle.innerHTML = categoria;
+
+    if (titlePlace !== null) {
+      titlePlace.insertBefore(categoryTitle, titlePlace.firstChild);
+    }
+
+    categoryMenuItemLabel.appendChild(label);
+
+    menuItem.appendChild(categoryMenuItem);
+    menuItem.appendChild(categoryMenuItemLabel);
+
+    menuUL.appendChild(menuItem);
+
+    const toggleHidden = (categoria, slug) => {
+      const hideShowElement = document.getElementById(
+        `containerProdutos_${slug}`
+      );
+      const IsCheckedLabel = document.getElementById(categoria);
+
+      if (IsCheckedLabel.checked === true && hideShowElement !== null) {
+        hideShowElement.classList.remove("hidden");
+        return;
+      }
+      if (hideShowElement === null) {
+        return;
+      }
+      hideShowElement.classList.add("hidden");
+    };
+
+    if (categoria !== null) {
+      document.getElementById(categoria).onclick = function () {
+        toggleHidden(categoria, categoriesSlugForMenu[index]);
+      };
     }
   });
 };
