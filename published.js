@@ -86,9 +86,13 @@ const callMe = (produto, page, callback = null) => {
       `containerProdutos_${productName}`
     );
 
-    const createProductCardDiv = document.createElement("div");
-    createProductCardDiv.classList.add(`${productName}`);
-    createProductCardDiv.id = `${productName}`;
+    const ExistsDivProduct = document.getElementById(productName);
+
+    if (!ExistsDivProduct) {
+      const createProductCardDiv = document.createElement("div");
+      createProductCardDiv.classList.add(`${productName}`);
+      createProductCardDiv.id = `${productName}`;
+    }
 
     getDivProductContainer.appendChild(createProductCardDiv);
 
@@ -297,9 +301,6 @@ const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
     const hideShowElement = document.getElementById(
       `containerProdutos_${categoriesSlugForMenu[index]}`
     );
-    // if (hideShowElement !== null) {
-    //   hideShowElement.classList.add("hidden");
-    // }
 
     const titlePlace = document.getElementById(
       `containerProdutos_${categoriesSlugForMenu[index]}`
@@ -344,7 +345,6 @@ const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
 };
 
 const toggleHidden = (categoria, slug) => {
-  // const hideShowElement = document.getElementById(`containerProdutos_${slug}`);
   const IsCheckedLabel = document.getElementsByName("categoriaMenu");
 
   const containerCategory = `containerProdutos_${slug}`.replace(
@@ -352,16 +352,7 @@ const toggleHidden = (categoria, slug) => {
     ""
   );
 
-  // if (hideShowElement !== null) {
   for (let i = 0; i < IsCheckedLabel.length; i++) {
-    // console.log(IsCheckedLabel[i].value, IsCheckedLabel[i].checked);
-    // console.log(IsCheckedLabel[i].checked && containerCategory === slug);
-    // console.log(IsCheckedLabel[i].value);
-    // console.log(containerCategory);
-
-    // switch (slug) {
-    //   case "destaque":
-
     const maltes = document.getElementById(`containerProdutos_maltes`);
     if (maltes !== null) {
       maltes.classList.add("hidden");
@@ -404,8 +395,63 @@ const toggleHidden = (categoria, slug) => {
     document
       .getElementById(`containerProdutos_${slug}`)
       .classList.remove("hidden");
-    // break;
-    // }
-    // }
+
+    callMe(slug, 1);
+
+    hideEmptyNodes();
   }
 };
+
+const hideEmptyNodes = () => {
+  const getPrice = document.querySelectorAll(".ProductPrice");
+
+  for (let i = 0; i < getPrice.length; i++) {
+    if (getPrice[i].childNodes.length === 0) {
+      getPrice[i].classList.add("hidden");
+    } else getPrice[i].classList.remove("hidden");
+  }
+};
+
+/*Pagination*/
+
+class pagination {
+  constructor(category) {
+    this.pageNumber = 1;
+    this.category = category;
+  }
+
+  nextPage(category) {
+    const maxQauntitie = Math.ceil(
+      JSON.parse(
+        localStorage.getItem(`@PontoDoMalte:${category}-totalQauntitie`)
+      ) / 16
+    );
+    if (this.pageNumber <= maxQauntitie) {
+      this.pageNumber++;
+
+      if (this.pageNumber >= maxQauntitie) {
+        this.pageNumber = maxQauntitie;
+      }
+    }
+    callMe(category, this.pageNumber);
+    console.log(this.pageNumber);
+  }
+
+  prevPager = (category) => {
+    if (this.pageNumber > 0) {
+      this.pageNumber--;
+
+      if (this.pageNumber === 0) {
+        this.pageNumber = 1;
+      }
+    }
+    callMe(category, this.pageNumber);
+    // console.log(this.pageNumber);
+  };
+}
+
+hideEmptyNodes();
+
+window.addEventListener("load", (event) => {
+  document.getElementById("Destaque").click();
+});

@@ -1,0 +1,226 @@
+.fusion-slider-revolution {
+	border:none !important;
+}
+
+
+.whatsApp_BT{
+	position: fixed;
+	bottom: 70px;
+	right: 100px;
+	width: 30px;
+	height: 30px;
+	z-index: 10;
+	box-shadow: 0 0 32px #00000040;
+	border-radius: 50%;
+	transition: .3s;
+}
+
+@media screen and (max-width:900px){
+	.whatsApp_BT{
+		bottom: 32px;
+		right: 32px;
+	}
+}
+
+.whatsApp_BT:hover{
+	box-shadow: 0 0 32px #000000aa, 2px 8px 16px #000;
+	transition: .2s
+}
+
+.whatsApp_BT > img{
+	margin: -50%;
+	width: 60px;
+	max-width: 60px !important;
+}
+
+.home_post_card > section > article{
+animation-duration: 0.3s;
+background: #fff; 
+	transform: scale(.95);
+padding: 0;
+border-radius: 8px;
+box-shadow: 0 4px 8px #000;
+	
+}
+
+.home_post_card > section > article > .recent-posts-content {
+	padding: 0 16px;
+}
+
+#produtos, #maltes, #lupulos, #equipamentos, #destaques, #novidades, #leveduras, #servicos, #insumos_diversos {
+	display: flex;
+	flex-wrap:wrap;
+    height: 100%;
+	}
+
+/*### Novos cards###*/
+
+#containerProdutos_destaque,
+#containerProdutos_equipamentos,
+#containerProdutos_insumos_diversos,
+#containerProdutos_leveduras,
+#containerProdutos_lupulos,
+#containerProdutos_maltes,
+#containerProdutos_servicos{
+	display:block
+}
+
+#menuProdutos{
+	list-style: none;
+	display: flex;
+	width: 100%;
+/* 	background: red; */
+	flex-wrap: wrap;
+}
+
+.selectMenu{
+	margin:8px 0;
+	margin-right: 8px
+}
+
+.selectMenu + .selectMenu{
+	margin: 8px
+}
+.selectMenu > input{
+	display:none;
+}
+
+.selectMenu > label{
+	padding: 4px 8px;
+	border-radius: 4px;
+	border:1px solid #6c081466;
+	box-shadow: 0 2px 4px #aaa;
+	transition: .3s;
+	color: #6c0814;
+}
+
+.selectMenu > input:checked + label{
+	background: #fed100;
+	box-shadow: 0 8px 16px #aaa;
+}
+
+/*####*/
+
+
+.container_maltes, .container_lupulos, .container_equipamentos{
+	max-height: 100%;
+}
+
+.hidden{
+	max-height: 0;
+	overflow: hidden;
+	transition: .3s
+}
+
+#maltes, #lupulos, #equipamentos{
+	transition: .2s;
+}
+
+.a180{
+transform: rotate(180deg);
+	transition: .3s
+}
+
+.ProductCardList{
+	box-shadow: 0 2px 4px #aaa;
+	padding: 0;
+	border-radius: 8px;
+	max-width: 272px;
+	overflow: hidden;
+	margin: 0 8px 32px 8px;
+	}
+
+.ProductCardList > h3, .ProductCardList > .ProductPrice {
+	
+	padding: 0 16px;
+	margin: 8px 0;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.ProductCardList > span > p{
+	margin-bottom: 0;
+	padding: 0 16px;
+	}
+
+.productImage{
+	height: 200px;
+	overflow:hidden;
+	}
+
+.productImage img{
+	object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+
+.container_prod_dest{
+	max-width: 100%;
+	overflow: hidden;
+	position: relative;
+	left: 0;
+	}
+
+.carouselNext{
+	position: absolute;
+	right: 8px;
+	top: 40%;
+	background: #fffd;
+	display: block;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 0 0 4px #aaa;
+	transition: .3s;
+}
+
+.carouselPrev{
+	position: absolute;
+	left: 8px;
+	top: 40%;
+	background: #fffd;
+	display: block;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 0 0 4px #aaa;
+	transition: .3s;
+}
+
+.carouselNext:hover, .carouselPrev:hover{
+	box-shadow: 0 0 8px #777;
+	transition: .3s;
+}
+
+.carousel{
+	width: calc(300px * 10);
+	transition: .5s ease-in-out;
+}
+
+.carousel >  .ProductCardList{
+	width: 234px;
+	height: 268px;
+	background: #F8D845
+}
+
+.carousel > .ProductCardList > h3 {
+	font-size: 14px;
+	color: #5A5A5A;
+	margin-bottom:0
+}
+
+.ProductPrice{
+	padding: 0;
+	font-size: 18px;
+	margin: 0;
+}
+
+.ProductPrice:before{
+	content: 'R$: ';
+}
