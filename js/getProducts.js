@@ -75,6 +75,8 @@
       }
       return;
     })();
+    // callMe(category.slug, 1);
+    createDivProdutc(category.slug, 1);
   });
 
   createMenuProducts(categoriesNameForMenu, categoriesSlugForMenu);

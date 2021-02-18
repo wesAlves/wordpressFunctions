@@ -17,6 +17,7 @@ const cardsFields = {
   embalagem: "sachet",
   tipo_de_fermentacao: "alta",
   descricao: "Banana description",
+  laboratorio: "LevTeck",
   foto: "",
   link: "",
 };
@@ -30,7 +31,8 @@ const createCardType = (category, productObject = cardsFields) => {
 
   card.classList.add(`card_${category}`);
   card.setAttribute("id", `${category}_${productObject.nome}`);
-  card.innerHTML = category;
+  card.classList.add("ProductCardList");
+  //   card.innerHTML = category;
 
   getCardParentDiv.appendChild(card);
 
@@ -217,6 +219,7 @@ const levedurasCard = (category, productName) => {
     tipo_preco_03,
     embalagem,
     tipo_de_fermentacao,
+    laboratorio,
     foto,
     link,
   } = productName;
@@ -226,6 +229,7 @@ const levedurasCard = (category, productName) => {
     "preco_container",
     "embalagem",
     "tipo_fermentacao",
+    "laboratorio",
     "foto",
   ];
   const precosArr = [preco_01, preco_02, preco_03];
@@ -263,12 +267,18 @@ const levedurasCard = (category, productName) => {
   leveduraEmbalagem.appendChild(textNodeEmbalagem);
 
   const leveduraTipoFermentacao = document.getElementById(
-    `${nome}tipo_fermentacao`
+    `${nome}_tipo_fermentacao`
   );
   const textNodeTipoFermentacao = document.createTextNode(
     `Embalagem: ${embalagem}`
   );
   leveduraTipoFermentacao.appendChild(textNodeTipoFermentacao);
+
+  const leveduraLaboratorio = document.getElementById(`${nome}_laboratorio`);
+  const textNodeLaboratorio = document.createTextNode(
+    `Embalagem: ${embalagem}`
+  );
+  leveduraLaboratorio.appendChild(textNodeLaboratorio);
 
   const fotoDiv = document.getElementById(`${nome}_foto`);
   const createImg = document.createElement("img");

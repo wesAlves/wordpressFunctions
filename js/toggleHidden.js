@@ -59,8 +59,9 @@ const toggleHidden = (categoria, slug) => {
     document
       .getElementById(`containerProdutos_${slug}`)
       .classList.remove("hidden");
-    // break;
-    // }
-    // }
+
+    // callMe(slug, 1);
+
+    hideEmptyNodes();
   }
 };

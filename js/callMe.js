@@ -1,6 +1,3 @@
-const callMe = (produto, page, callback = null) => {
+const callMe = (produto, page) => {
   createDivProdutc(produto, page);
-  if (callback && typeof callback === "function") {
-    callback();
-  }
 };
