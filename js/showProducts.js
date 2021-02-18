@@ -20,6 +20,14 @@ const showProductsList = (produtoCategorias, divName, page) => {
   );
 
   getProdutoData.map((produtoCategoria) => {
+    createCardType(divName, produtoCategoria);
+
+    // console.log(divName);
+  });
+  console.log(getProdutoData);
+
+  /*
+  getProdutoData.map((produtoCategoria) => {
     const classProduct = document.createAttribute("class");
     const classProductImage = document.createAttribute("class");
     const classProductPrice = document.createAttribute("class");
@@ -185,4 +193,6 @@ const showProductsList = (produtoCategorias, divName, page) => {
         break;
     }
   });
+
+  */
 };

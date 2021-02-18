@@ -12,5 +12,5 @@ const createDivProdutc = (productName, page, callback = null) => {
   if (callback && typeof callback === "function") {
     callback(productName, productName, page);
   }
-  // showProductsList(productName, productName, page);
+  showProductsList(productName, productName, page);
 };

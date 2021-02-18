@@ -25,7 +25,7 @@
 
 <script>
 
-    const maltesOBJ = {
+    const maltesOBJ = [{
         nome: "Pilsen",
         preco_01: 10,
         preco_02: 10,
@@ -37,12 +37,30 @@
         cor_malte: "10",
         tipo_cor_malte: "10",
         descricao: "Banana",
+        foto: ""
+    },
+    {
+        nome: "Pale",
+        preco_01: 10,
+        preco_02: 10,
+        preco_03: 10,
+        tipo_preco_01: "/ kg",
+        tipo_preco_02: "/ saca 25 kg",
+        tipo_preco_03: "outros",
+        potencial_malte: "10",
+        cor_malte: "10",
+        tipo_cor_malte: "10",
+        descricao: "Banana",
+        foto: ""
     }
+    ]
 
+    maltesOBJ.map(malte => {
+        createCardType("maltes", malte);
+        // console.log(malte)
+    })
 
-
-    createCardType("maltes", maltesOBJ);
-    // createCardType("lupulos");
+    createCardType("destaque");
     // createCardType("leveduras");
 </script>
 
