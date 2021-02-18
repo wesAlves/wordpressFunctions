@@ -1,0 +1,23 @@
+@import "./variables.scss";
+@import "./mapa.scss";
+@import "./whatsapp_bt.scss";
+@import "./homePostsCard.scss";
+@import "./produtosPage.scss";
+
+.fusion-slider-revolution {
+  border: none !important;
+}
+
+.container_prod_dest {
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  left: 0;
+}
+
+.hidden {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s;
+  display: none !important;
+}

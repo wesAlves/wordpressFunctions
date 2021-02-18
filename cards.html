@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/cardTypes.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="containerProdutos_maltes"></div>
+    <div id="containerProdutos_lupulos"></div>
+    <div id="containerProdutos_leveduras"></div>
+    <div id="containerProdutos_equipamentos"></div>
+    <div id="containerProdutos_destaque"></div>
+    <div id="containerProdutos_servicos"></div>
+    <div id="containerProdutos_insumos_diversos"></div>
+
+
+
+</body>
+
+<script>
+
+    const maltesOBJ = {
+        nome: "Pilsen",
+        preco_01: 10,
+        preco_02: 10,
+        preco_03: 10,
+        tipo_preco_01: "/ kg",
+        tipo_preco_02: "/ saca 25 kg",
+        tipo_preco_03: "outros",
+        potencial_malte: "10",
+        cor_malte: "10",
+        tipo_cor_malte: "10",
+        descricao: "Banana",
+    }
+
+
+
+    createCardType("maltes", maltesOBJ);
+    // createCardType("lupulos");
+    // createCardType("leveduras");
+</script>
+
+</html>

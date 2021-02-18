@@ -1,0 +1,154 @@
+// produtosPage.scss
+
+@import "./variables.scss";
+
+#menuProdutos {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  /* 	background: red; */
+  flex-wrap: wrap;
+}
+
+.selectMenu {
+  margin: 8px 0;
+  margin-right: 8px;
+
+  & + & {
+    margin: 8px;
+  }
+  & > input {
+    display: none;
+  }
+
+  & > label {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba($deepRed, 0.7);
+    box-shadow: 0 2px 4px $shadowGray;
+    transition: 0.3s;
+    color: $deepRed;
+  }
+
+  & > input:checked + label {
+    background: $deepRed;
+    color: white;
+    box-shadow: 0 8px 16px $shadowGray;
+  }
+}
+
+#produtos,
+#maltes,
+#lupulos,
+#equipamentos,
+#destaques,
+#novidades,
+#leveduras,
+#servicos,
+#insumos_diversos {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  transition: 0.2s;
+}
+
+#containerProdutos_destaque,
+#containerProdutos_equipamentos,
+#containerProdutos_insumos_diversos,
+#containerProdutos_leveduras,
+#containerProdutos_lupulos,
+#containerProdutos_maltes,
+#containerProdutos_servicos {
+  display: block;
+}
+
+.container_destaque,
+.container_equipamentos,
+.container_insumos_diversos,
+.container_leveduras,
+.container_lupulos,
+.container_maltes,
+.container_servicos {
+  max-height: 100%;
+}
+
+.ProductCardList {
+  box-shadow: 0 2px 4px $shadowGray;
+  padding: 0;
+  border-radius: 8px;
+  max-width: 272px;
+  overflow: hidden;
+  margin: 0 8px 32px 8px;
+
+  & > h3 {
+    padding: 0 16px;
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: $deepRed !important;
+    // font-size: 24px;
+  }
+
+  & > span {
+    padding: 12px;
+    display: inline-block;
+    // width: 100%;
+    // padding: 8px 16px
+
+    & > p {
+      margin-bottom: 0;
+      padding: 0 16px;
+    }
+  }
+}
+
+.productImage {
+  height: 80px;
+  max-height: 80px;
+  overflow: hidden;
+
+  #equipamentos > .ProductCardList > & {
+    height: 200px;
+    max-height: 200px;
+  }
+
+  & img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+.ProductPrice {
+  padding: 0;
+  font-size: 18px;
+  margin: 0;
+
+  // float: left;
+  // margin-left: 16px;
+  // margin-bottom: 16px;
+  // min-width: 4.3em;
+
+  &:before {
+    content: "R$: ";
+  }
+}
+
+.pagination_BTN {
+  color: red;
+  border: 1px solid;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  float: left !important;
+  margin: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.33s;
+
+  &:hover {
+    content: "";
+    box-shadow: 0 2px 8px $shadowGray;
+    transition: 0.3s;
+  }
+}

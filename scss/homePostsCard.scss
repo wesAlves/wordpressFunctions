@@ -1,0 +1,15 @@
+// homePostsCard.scss
+.home_post_card {
+  & > section > article {
+    animation-duration: 0.3s;
+    background: #fff;
+    transform: scale(0.95);
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px #000;
+  }
+
+  & > section > article > .recent-posts-content {
+    padding: 0 16px;
+  }
+}

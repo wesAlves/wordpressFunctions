@@ -1,0 +1,54 @@
+//productCarousel
+
+.carouselNext {
+  position: absolute;
+  right: 8px;
+  top: 40%;
+  background: #fffd;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 4px #aaa;
+  transition: 0.3s;
+}
+
+.carouselPrev {
+  position: absolute;
+  left: 8px;
+  top: 40%;
+  background: #fffd;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 4px #aaa;
+  transition: 0.3s;
+}
+
+.carouselNext:hover,
+.carouselPrev:hover {
+  box-shadow: 0 0 8px #777;
+  transition: 0.3s;
+}
+
+.carousel {
+  width: calc(300px * 10);
+  transition: 0.5s ease-in-out;
+}
+
+.carousel > .ProductCardList {
+  width: 234px;
+  height: 268px;
+  background: #f8d845;
+}
+
+.carousel > .ProductCardList > h3 {
+  font-size: 14px;
+  color: #5a5a5a;
+  margin-bottom: 0;
+}
