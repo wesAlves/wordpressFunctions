@@ -25,7 +25,7 @@ const cardsFields = {
 const createCardType = (category, productObject = cardsFields) => {
     const getCardParentDiv = document.getElementById(category);
 
-    console.log(getCardParentDiv);
+    //console.log(getCardParentDiv);
 
     const card = document.createElement("div");
 

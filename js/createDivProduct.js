@@ -8,9 +8,9 @@ const createDivProdutc = (productName, page, callback = null) => {
     createProductCardDiv.id = `${productName}`;
 
     if (getDivProductContainer !== null) {
-        console.log(getDivProductContainer);
+        //console.log(getDivProductContainer);
         getDivProductContainer.appendChild(createProductCardDiv);
-        console.log(productName);
+        //console.log(productName);
         showProductsList(productName, productName, page);
     }
     return;
