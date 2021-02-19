@@ -5,6 +5,8 @@ class pagination {
   }
 
   nextPage(category) {
+    const getParentDiv = document.getElementById(this.category);
+    getParentDiv.innerHTML = "";
     const maxQauntitie = Math.ceil(
       JSON.parse(
         localStorage.getItem(`@PontoDoMalte:${category}-totalQauntitie`)
@@ -23,6 +25,8 @@ class pagination {
   }
 
   prevPager = (category) => {
+    const getParentDiv = document.getElementById(this.category);
+    getParentDiv.innerHTML = "";
     if (this.pageNumber > 0) {
       this.pageNumber--;
 
@@ -30,8 +34,8 @@ class pagination {
         this.pageNumber = 1;
       }
     }
-    createDivProdutc(this.category, this.pageNumber);
-    // callMe(category, this.pageNumber);
+    // createDivProdutc(this.category, this.pageNumber);
+    callMe(category, this.pageNumber);
     // console.log(this.pageNumber);
   };
 }

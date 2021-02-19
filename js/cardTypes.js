@@ -23,16 +23,13 @@ const cardsFields = {
 };
 
 const createCardType = (category, productObject = cardsFields) => {
-  const getCardParentDiv = document.getElementById(
-    `containerProdutos_${category}`
-  );
+  const getCardParentDiv = document.getElementById(category);
 
   const card = document.createElement("div");
 
   card.classList.add(`card_${category}`);
   card.setAttribute("id", `${category}_${productObject.nome}`);
   card.classList.add("ProductCardList");
-  //   card.innerHTML = category;
 
   getCardParentDiv.appendChild(card);
 

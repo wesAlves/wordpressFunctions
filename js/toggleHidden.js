@@ -62,6 +62,6 @@ const toggleHidden = (categoria, slug) => {
 
     // callMe(slug, 1);
 
-    hideEmptyNodes();
+    // hideEmptyNodes();
   }
 };
