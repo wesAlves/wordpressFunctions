@@ -7,6 +7,8 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 .selectMenu {
@@ -23,16 +25,25 @@
   & > label {
     padding: 4px 8px;
     border-radius: 4px;
-    border: 1px solid rgba($deepRed, 0.7);
+    border: 1px solid white;
     box-shadow: 0 2px 4px $shadowGray;
     transition: 0.3s;
-    color: $deepRed;
+    background: white;
+    // color: $deepRed;
+
+    &:hover {
+      border: 1px solid rgba($deepRed, 0.7);
+      color: $deepRed;
+      box-shadow: 0 2px 4px $shadowGray, 0 4px 8px rgba($shadowGray, 0.3);
+      background-color: rgba($deepRed, 0.1);
+    }
   }
 
   & > input:checked + label {
     background: $deepRed;
     color: white;
     box-shadow: 0 8px 16px $shadowGray;
+    border: 1px solid rgba($deepRed, 0.7);
   }
 }
 
@@ -47,7 +58,7 @@
 #servicos,
 #insumos_diversos {
   @media screen and (max-width: 400px) {
-    justify-content: space-around;
+    justify-content: center;
   }
 
   display: flex;
@@ -89,7 +100,7 @@
   border-radius: 8px;
   max-width: 272px;
   overflow: hidden;
-  margin: 0 16px 32px 16px;
+  margin: 0 auto 32px auto;
   display: flex;
   flex-direction: column;
   background: white;
@@ -230,9 +241,7 @@
   }
 }
 
-// .categoryTitle {
-//   color: $deepRed !important;
-//   font-size: 24px !important;
-//   font-weight: 400 !important;
-//   margin: 0px !important;
-// }
+.categoryTitle {
+  color: $deepRed !important;
+  margin: 64px 0 0 0 !important;
+}
