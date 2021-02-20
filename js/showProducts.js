@@ -30,7 +30,7 @@ const showProductsList = (produtoCategorias, divName, page) => {
       tipo_preco_03: `${produtoCategoria.acf.tipo_preco_2}`,
       potencial_malte: `${produtoCategoria.acf.potencial_malte}`,
       cor_malte: `${produtoCategoria.acf.cor_malte}`,
-      tipo_cor_malte: `${produtoCategoria.acf.tipo_cor_malte_malte}`,
+      tipo_cor_malte: `${produtoCategoria.acf.tipo_cor_malte}`,
       tipo_lupulo: `${produtoCategoria.acf.tipo_lupulo}`,
       aplicacao_lupulo: `${produtoCategoria.acf.aplicacao_lupulo}`,
       pais_de_origem: `${produtoCategoria.acf.pais_de_origem}`,

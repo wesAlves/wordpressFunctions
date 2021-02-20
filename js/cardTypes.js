@@ -78,9 +78,9 @@ const maltesCard = (category, productObject) => {
     tipo_preco_02,
     preco_03,
     tipo_preco_03,
-    potencial,
-    cor,
-    tipo_cor,
+    potencial_malte,
+    cor_malte,
+    tipo_cor_malte,
     foto,
     link,
   } = productObject;
@@ -104,30 +104,52 @@ const maltesCard = (category, productObject) => {
   const precoConatiner = document.getElementById(`${nome}_preco_container`);
 
   precosArr.map((precoProduct, index) => {
-    const preco = document.createElement("p");
-    preco.classList.add("preco");
+    if (
+      precoProduct !== null &&
+      precoProduct > 0 &&
+      precoProduct !== undefined
+    ) {
+      const preco = document.createElement("p");
+      preco.classList.add("preco");
 
-    const createSpanPrice = document.createElement("span");
+      const createSpanPrice = document.createElement("span");
 
-    const textNodePreco = document.createTextNode(precoProduct);
-    const textNodePrecoTipo = document.createTextNode(
-      ` ${precosTipeArr[index]}`
-    );
+      const textNodePreco = document.createTextNode(precoProduct);
+      const textNodePrecoTipo = document.createTextNode(
+        ` ${precosTipeArr[index]}`
+      );
 
-    createSpanPrice.appendChild(textNodePrecoTipo);
+      createSpanPrice.appendChild(textNodePrecoTipo);
 
-    preco.appendChild(textNodePreco);
-    preco.appendChild(createSpanPrice);
-    precoConatiner.appendChild(preco);
+      preco.appendChild(textNodePreco);
+      preco.appendChild(createSpanPrice);
+      precoConatiner.appendChild(preco);
+    }
   });
 
   const maltePotencial = document.getElementById(`${nome}_potencial`);
-  const textNodePotencial = document.createTextNode(`${potencial}`);
-  maltePotencial.appendChild(textNodePotencial);
+  if (
+    potencial_malte !== null &&
+    potencial_malte !== undefined &&
+    potencial_malte !== "null"
+  ) {
+    const textNodePotencial = document.createTextNode(`${potencial_malte}`);
+    maltePotencial.appendChild(textNodePotencial);
+  } else {
+    maltePotencial.classList.add("hidden");
+  }
 
   const malteCor = document.getElementById(`${nome}_cor`);
-  const textNodeCor = document.createTextNode(`${cor} ${tipo_cor}`);
-  malteCor.appendChild(textNodeCor);
+
+  if (cor_malte !== null && cor_malte !== "null" && cor_malte !== undefined) {
+    const textNodeCor = document.createTextNode(
+      `${cor_malte} ${tipo_cor_malte}`
+    );
+    malteCor.appendChild(textNodeCor);
+    malteCor.classList.remove("hidden");
+  } else {
+    malteCor.classList.add("hidden");
+  }
 
   const fotoDiv = document.getElementById(`${nome}_foto`);
   const createImg = document.createElement("img");
@@ -337,9 +359,7 @@ const genericProduct = (category, productName) => {
   precosArr.map((precoProduct, index) => {
     const preco = document.createElement("p");
     preco.classList.add("preco");
-
     const createSpanPrice = document.createElement("span");
-
     const textNodePreco = document.createTextNode(precoProduct);
     const textNodePrecoTipo = document.createTextNode(
       ` ${precosTipeArr[index]}`
