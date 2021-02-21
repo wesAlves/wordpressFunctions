@@ -22,12 +22,20 @@ const showProductsList = (produtoCategorias, divName, page) => {
   getProdutoData.map((produtoCategoria) => {
     const produtoCategoriaOBJ = {
       nome: `${produtoCategoria.title.rendered}`,
-      preco_01: `${produtoCategoria.acf.preco_01}`,
-      preco_02: `${produtoCategoria.acf.preco_2}`,
-      preco_03: `${produtoCategoria.acf.preco_3}`,
-      tipo_preco_01: `${produtoCategoria.acf.tipo_preco_1}`,
-      tipo_preco_02: `${produtoCategoria.acf.tipo_preco_2}`,
-      tipo_preco_03: `${produtoCategoria.acf.tipo_preco_2}`,
+      preco: [
+        {
+          preco_01: `${produtoCategoria.acf.preco_01}`,
+          tipo_preco_01: `${produtoCategoria.acf.tipo_preco_1}`,
+        },
+        {
+          preco_02: `${produtoCategoria.acf.preco_2}`,
+          tipo_preco_02: `${produtoCategoria.acf.tipo_preco_2}`,
+        },
+        {
+          preco_03: `${produtoCategoria.acf.preco_3}`,
+          tipo_preco_03: `${produtoCategoria.acf.tipo_preco_3}`,
+        },
+      ],
       potencial_malte: `${produtoCategoria.acf.potencial_malte}`,
       cor_malte: `${produtoCategoria.acf.cor_malte}`,
       tipo_cor_malte: `${produtoCategoria.acf.tipo_cor_malte}`,

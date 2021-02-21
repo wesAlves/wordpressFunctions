@@ -25,8 +25,6 @@ const cardsFields = {
 const createCardType = (category, productObject = cardsFields) => {
   const getCardParentDiv = document.getElementById(category);
 
-  //console.log(getCardParentDiv);
-
   const card = document.createElement("div");
 
   card.classList.add(`card_${category}`);
@@ -35,79 +33,106 @@ const createCardType = (category, productObject = cardsFields) => {
 
   getCardParentDiv.appendChild(card);
 
-  switch (category) {
-    case "maltes":
-      maltesCard(category, productObject);
-      break;
-
-    case "lupulos":
-      lupulosCard(category, productObject);
-      break;
-
-    case "leveduras":
-      levedurasCard(category, productObject);
-      break;
-
-    case "equipamentos":
-      genericProduct(category, productObject);
-      //   equipamentosCard(category, productObject);
-      break;
-
-    case "servicos":
-      genericProduct(category, productObject);
-      //   servcicosCard(category, productObject);
-      break;
-
-    case "destaque":
-      destaquesCard(category, productObject);
-      break;
-
-    case "insumos_diversos":
-      genericProduct(category, productObject);
-      //   insumosDiversosCard(category, productObject);
-      break;
-  }
+  productCards(category, productObject);
 };
 
-const maltesCard = (category, productObject) => {
+const productCards = (category, productObject) => {
   const {
     nome,
-    preco_01,
-    tipo_preco_01,
-    preco_02,
-    tipo_preco_02,
-    preco_03,
-    tipo_preco_03,
+    preco,
     potencial_malte,
     cor_malte,
     tipo_cor_malte,
+    tipo_lupulo,
+    aplicacao_lupulo,
+    pais_de_origem,
+    alphas,
+    oleos,
+    embalagem,
+    tipo_de_fermentacao,
+    descricao,
     foto,
-    link,
+    // link,
+    laboratorio,
   } = productObject;
 
-  const categoryAtt = ["nome", "preco_container", "potencial", "cor", "foto"];
-  const precosArr = [preco_01, preco_02, preco_03];
-  const precosTipeArr = [tipo_preco_01, tipo_preco_02, tipo_preco_03];
+  delete productObject.link;
 
+  const categoryAtt = [];
+  const precosArr = [preco[0].preco_01, preco[1].preco_02, preco[2].preco_03];
+  const precosTipeArr = [
+    preco[0].tipo_preco_01,
+    preco[1].tipo_preco_02,
+    preco[2].tipo_preco_03,
+  ];
   const productDiv = document.getElementById(`${category}_${nome}`);
 
-  for (let i = 0; i < categoryAtt.length; i++) {
-    const createCategoryDiv = document.createElement("div");
-    createCategoryDiv.classList.add(categoryAtt[i]);
-    createCategoryDiv.setAttribute("id", `${nome}_${categoryAtt[i]}`);
-    productDiv.appendChild(createCategoryDiv);
-  }
-  const malteName = document.getElementById(`${nome}_nome`);
-  const textNodeName = document.createTextNode(`${nome}`);
-  malteName.appendChild(textNodeName);
+  Object.keys(productObject).map((categoryAttName) => {
+    if (
+      productObject[categoryAttName] !== "" &&
+      productObject[categoryAttName] !== null &&
+      productObject[categoryAttName] !== "null" &&
+      productObject[categoryAttName] !== "undefined" &&
+      productObject[categoryAttName] !== undefined &&
+      productObject[categoryAttName] !== 0
+    ) {
+      if (categoryAttName !== "tipo_cor_malte") {
+        const createCategoryDiv = document.createElement("div");
+        categoryAttName !== "preco"
+          ? createCategoryDiv.classList.add(categoryAttName)
+          : createCategoryDiv.classList.add(`${categoryAttName}_container`);
 
-  const precoConatiner = document.getElementById(`${nome}_preco_container`);
+        createCategoryDiv.setAttribute("id", `${nome}_${categoryAttName}`);
+
+        productDiv.appendChild(createCategoryDiv);
+
+        categoryAtt.push(categoryAttName);
+      }
+    }
+  });
+
+  categoryAtt.map((categoryName) => {
+    const categoryConatiner = document.getElementById(
+      `${nome}_${categoryName}`
+    );
+
+    if (
+      categoryName !== "preco" &&
+      categoryName !== "foto" &&
+      categoryName !== "cor_malte" &&
+      categoryName !== "tipo_cor_malte"
+    ) {
+      const textNode = document.createTextNode(
+        `${productObject[categoryName]}`
+      );
+      categoryConatiner.appendChild(textNode);
+    }
+
+    if (categoryName === "cor_malte") {
+      const createSpanTipoCor = document.createElement("span");
+
+      const textNodePrecoTipo = document.createTextNode(
+        ` ${productObject["tipo_cor_malte"]}`
+      );
+
+      const textNode = document.createTextNode(
+        `${productObject[categoryName]}`
+      );
+      createSpanTipoCor.appendChild(textNodePrecoTipo);
+      categoryConatiner.appendChild(textNode);
+      categoryConatiner.appendChild(createSpanTipoCor);
+    }
+  });
+
+  const precoConatiner = document.getElementById(`${nome}_preco`);
 
   precosArr.map((precoProduct, index) => {
     if (
       precoProduct !== null &&
-      precoProduct > 0 &&
-      precoProduct !== undefined
+      precoProduct !== "null" &&
+      precoProduct !== undefined &&
+      precoProduct !== "undefined" &&
+      precoProduct !== ""
     ) {
       const preco = document.createElement("p");
       preco.classList.add("preco");
@@ -119,321 +144,30 @@ const maltesCard = (category, productObject) => {
         ` ${precosTipeArr[index]}`
       );
 
-      createSpanPrice.appendChild(textNodePrecoTipo);
-
-      preco.appendChild(textNodePreco);
-      preco.appendChild(createSpanPrice);
-      precoConatiner.appendChild(preco);
+      if (
+        precosTipeArr[index] !== null &&
+        precosTipeArr[index] !== "null" &&
+        precosTipeArr[index] !== undefined &&
+        precosTipeArr[index] !== "undefined"
+      ) {
+        createSpanPrice.appendChild(textNodePrecoTipo);
+        preco.appendChild(textNodePreco);
+        preco.appendChild(createSpanPrice);
+        precoConatiner.appendChild(preco);
+      } else {
+        preco.appendChild(textNodePreco);
+        preco.appendChild(createSpanPrice);
+        precoConatiner.appendChild(preco);
+      }
     }
   });
 
-  const maltePotencial = document.getElementById(`${nome}_potencial`);
-  if (
-    potencial_malte !== null &&
-    potencial_malte !== undefined &&
-    potencial_malte !== "null"
-  ) {
-    const textNodePotencial = document.createTextNode(`${potencial_malte}`);
-    maltePotencial.appendChild(textNodePotencial);
-  } else {
-    maltePotencial.classList.add("hidden");
-  }
-
-  const malteCor = document.getElementById(`${nome}_cor`);
-
-  if (cor_malte !== null && cor_malte !== "null" && cor_malte !== undefined) {
-    const textNodeCor = document.createTextNode(
-      `${cor_malte} ${tipo_cor_malte}`
-    );
-    malteCor.appendChild(textNodeCor);
-    malteCor.classList.remove("hidden");
-  } else {
-    malteCor.classList.add("hidden");
-  }
-
   const fotoDiv = document.getElementById(`${nome}_foto`);
   const createImg = document.createElement("img");
-  createImg.src = foto;
-  fotoDiv.appendChild(createImg);
-};
+  foto !== "false"
+    ? (createImg.src = foto)
+    : (createImg.src =
+        "http://pontodomalte.com.br/wp-content/uploads/2021/02/image-placeholder-350x350-1.png");
 
-const lupulosCard = (category, productName) => {
-  const {
-    nome,
-    preco_01,
-    tipo_preco_01,
-    preco_02,
-    tipo_preco_02,
-    preco_03,
-    tipo_preco_03,
-    aplicacao_lupulo,
-    pais_de_origem,
-    alphas,
-    oleos,
-    foto,
-    link,
-  } = productName;
-
-  const categoryAtt = [
-    "nome",
-    "preco_container",
-    "aplicacao",
-    "pais_de_origem",
-    "alphas",
-    "oleos",
-    "foto",
-  ];
-  const precosArr = [preco_01, preco_02, preco_03];
-  const precosTipeArr = [tipo_preco_01, tipo_preco_02, tipo_preco_03];
-
-  const productDiv = document.getElementById(`${category}_${nome}`);
-
-  for (let i = 0; i < categoryAtt.length; i++) {
-    const createCategoryDiv = document.createElement("div");
-    createCategoryDiv.classList.add(categoryAtt[i]);
-    createCategoryDiv.setAttribute("id", `${nome}_${categoryAtt[i]}`);
-    productDiv.appendChild(createCategoryDiv);
-  }
-
-  const lupuloName = document.getElementById(`${nome}_nome`);
-  const textNodeName = document.createTextNode(`${nome}`);
-  lupuloName.appendChild(textNodeName);
-
-  const precoConatiner = document.getElementById(`${nome}_preco_container`);
-
-  precosArr.map((precoProduct, index) => {
-    const preco = document.createElement("p");
-    preco.classList.add("preco");
-
-    const createSpanPrice = document.createElement("span");
-
-    const textNodePreco = document.createTextNode(precoProduct);
-    const textNodePrecoTipo = document.createTextNode(
-      ` ${precosTipeArr[index]}`
-    );
-
-    createSpanPrice.appendChild(textNodePrecoTipo);
-
-    preco.appendChild(textNodePreco);
-    preco.appendChild(createSpanPrice);
-    precoConatiner.appendChild(preco);
-  });
-
-  const lupuloAplicacao = document.getElementById(`${nome}_aplicacao`);
-  const textNodeAplicacao = document.createTextNode(`${aplicacao_lupulo}`);
-  lupuloAplicacao.appendChild(textNodeAplicacao);
-
-  const lupuloPaisOrigem = document.getElementById(`${nome}_pais_de_origem`);
-  const textNodePaisOrigen = document.createTextNode(`${pais_de_origem}`);
-  lupuloPaisOrigem.appendChild(textNodePaisOrigen);
-
-  const lupulosAlphas = document.getElementById(`${nome}_alphas`);
-  const textNodeAlphas = document.createTextNode(`${alphas}`);
-  lupulosAlphas.appendChild(textNodeAlphas);
-
-  const lupulosOleos = document.getElementById(`${nome}_oleos`);
-  const textNodeOleos = document.createTextNode(`${oleos}`);
-  lupulosOleos.appendChild(textNodeOleos);
-
-  const fotoDiv = document.getElementById(`${nome}_foto`);
-  const createImg = document.createElement("img");
-  createImg.src = foto;
-  fotoDiv.appendChild(createImg);
-};
-
-const levedurasCard = (category, productName) => {
-  const {
-    nome,
-    preco_01,
-    tipo_preco_01,
-    preco_02,
-    tipo_preco_02,
-    preco_03,
-    tipo_preco_03,
-    embalagem,
-    tipo_de_fermentacao,
-    laboratorio,
-    foto,
-    link,
-  } = productName;
-
-  const categoryAtt = [
-    "nome",
-    "preco_container",
-    "embalagem",
-    "tipo_fermentacao",
-    "laboratorio",
-    "foto",
-  ];
-  const precosArr = [preco_01, preco_02, preco_03];
-  const precosTipeArr = [tipo_preco_01, tipo_preco_02, tipo_preco_03];
-
-  const productDiv = document.getElementById(`${category}_${nome}`);
-
-  for (let i = 0; i < categoryAtt.length; i++) {
-    const createCategoryDiv = document.createElement("div");
-    createCategoryDiv.classList.add(categoryAtt[i]);
-    createCategoryDiv.setAttribute("id", `${nome}_${categoryAtt[i]}`);
-    productDiv.appendChild(createCategoryDiv);
-  }
-
-  const leveduraName = document.getElementById(`${nome}_nome`);
-  const textNodeName = document.createTextNode(`${nome}`);
-  leveduraName.appendChild(textNodeName);
-
-  const precoConatiner = document.getElementById(`${nome}_preco_container`);
-
-  precosArr.map((precoProduct, index) => {
-    const preco = document.createElement("p");
-    preco.classList.add("preco");
-
-    const createSpanPrice = document.createElement("span");
-
-    const textNodePreco = document.createTextNode(precoProduct);
-    const textNodePrecoTipo = document.createTextNode(
-      ` ${precosTipeArr[index]}`
-    );
-
-    createSpanPrice.appendChild(textNodePrecoTipo);
-
-    preco.appendChild(textNodePreco);
-    preco.appendChild(createSpanPrice);
-    precoConatiner.appendChild(preco);
-  });
-
-  const leveduraEmbalagem = document.getElementById(`${nome}_embalagem`);
-  const textNodeEmbalagem = document.createTextNode(`${embalagem}`);
-  leveduraEmbalagem.appendChild(textNodeEmbalagem);
-
-  const leveduraTipoFermentacao = document.getElementById(
-    `${nome}_tipo_fermentacao`
-  );
-  const textNodeTipoFermentacao = document.createTextNode(
-    `${tipo_de_fermentacao}`
-  );
-  leveduraTipoFermentacao.appendChild(textNodeTipoFermentacao);
-
-  const leveduraLaboratorio = document.getElementById(`${nome}_laboratorio`);
-  const textNodeLaboratorio = document.createTextNode(`${laboratorio}`);
-  leveduraLaboratorio.appendChild(textNodeLaboratorio);
-
-  const fotoDiv = document.getElementById(`${nome}_foto`);
-  const createImg = document.createElement("img");
-  createImg.src = foto;
-  fotoDiv.appendChild(createImg);
-};
-
-const genericProduct = (category, productName) => {
-  const {
-    nome,
-    preco_01,
-    tipo_preco_01,
-    preco_02,
-    tipo_preco_02,
-    preco_03,
-    tipo_preco_03,
-    descricao,
-    foto,
-    link,
-  } = productName;
-
-  const categoryAtt = ["nome", "preco_container", "descricao", "foto"];
-  const precosArr = [preco_01, preco_02, preco_03];
-  const precosTipeArr = [tipo_preco_01, tipo_preco_02, tipo_preco_03];
-
-  const productDiv = document.getElementById(`${category}_${nome}`);
-
-  for (let i = 0; i < categoryAtt.length; i++) {
-    const createCategoryDiv = document.createElement("div");
-    createCategoryDiv.classList.add(categoryAtt[i]);
-    createCategoryDiv.setAttribute("id", `${nome}_${categoryAtt[i]}`);
-    productDiv.appendChild(createCategoryDiv);
-  }
-
-  const genericName = document.getElementById(`${nome}_nome`);
-  const textNodeName = document.createTextNode(`${nome}`);
-  genericName.appendChild(textNodeName);
-
-  const precoConatiner = document.getElementById(`${nome}_preco_container`);
-
-  precosArr.map((precoProduct, index) => {
-    const preco = document.createElement("p");
-    preco.classList.add("preco");
-    const createSpanPrice = document.createElement("span");
-    const textNodePreco = document.createTextNode(precoProduct);
-    const textNodePrecoTipo = document.createTextNode(
-      ` ${precosTipeArr[index]}`
-    );
-
-    createSpanPrice.appendChild(textNodePrecoTipo);
-
-    preco.appendChild(textNodePreco);
-    preco.appendChild(createSpanPrice);
-    precoConatiner.appendChild(preco);
-  });
-
-  const genericDescicao = document.getElementById(`${nome}_descricao`);
-  const textNodeDescricao = document.createTextNode(`${descricao}`);
-  genericDescicao.appendChild(textNodeDescricao);
-
-  const fotoDiv = document.getElementById(`${nome}_foto`);
-  const createImg = document.createElement("img");
-  createImg.src = foto;
-  fotoDiv.appendChild(createImg);
-};
-
-const destaquesCard = (category, productName) => {
-  const {
-    nome,
-    preco_01,
-    tipo_preco_01,
-    preco_02,
-    tipo_preco_02,
-    preco_03,
-    tipo_preco_03,
-    foto,
-    link,
-  } = productName;
-
-  const categoryAtt = ["nome", "preco_container", "foto"];
-  const precosArr = [preco_01, preco_02, preco_03];
-  const precosTipeArr = [tipo_preco_01, tipo_preco_02, tipo_preco_03];
-
-  const productDiv = document.getElementById(`${category}_${nome}`);
-
-  for (let i = 0; i < categoryAtt.length; i++) {
-    const createCategoryDiv = document.createElement("div");
-    createCategoryDiv.classList.add(categoryAtt[i]);
-    createCategoryDiv.setAttribute("id", `${nome}_${categoryAtt[i]}`);
-    productDiv.appendChild(createCategoryDiv);
-  }
-
-  const descicaoName = document.getElementById(`${nome}_nome`);
-  const textNodeName = document.createTextNode(`${nome}`);
-  descicaoName.appendChild(textNodeName);
-
-  const precoConatiner = document.getElementById(`${nome}_preco_container`);
-
-  precosArr.map((precoProduct, index) => {
-    const preco = document.createElement("p");
-    preco.classList.add("preco");
-
-    const createSpanPrice = document.createElement("span");
-
-    const textNodePreco = document.createTextNode(precoProduct);
-    const textNodePrecoTipo = document.createTextNode(
-      ` ${precosTipeArr[index]}`
-    );
-
-    createSpanPrice.appendChild(textNodePrecoTipo);
-
-    preco.appendChild(textNodePreco);
-    preco.appendChild(createSpanPrice);
-    precoConatiner.appendChild(preco);
-  });
-
-  const fotoDiv = document.getElementById(`${nome}_foto`);
-  const createImg = document.createElement("img");
-  createImg.src = foto;
   fotoDiv.appendChild(createImg);
 };
