@@ -46,10 +46,10 @@ const toggleHidden = (categoria, slug) => {
       equipamentos.classList.add("hidden");
     }
 
-    const destaque = document.getElementById(`containerProdutos_destaque`);
-    if (destaque !== null) {
-      destaque.classList.add("hidden");
-    }
+    // const destaque = document.getElementById(`containerProdutos_destaque`);
+    // if (destaque !== null) {
+    //   destaque.classList.add("hidden");
+    // }
 
     const servicos = document.getElementById(`containerProdutos_servicos`);
     if (servicos !== null) {
@@ -60,8 +60,9 @@ const toggleHidden = (categoria, slug) => {
       .getElementById(`containerProdutos_${slug}`)
       .classList.remove("hidden");
 
-    // callMe(slug, 1);
+    const destaque = document.getElementById(`containerProdutos_destaque`);
+    destaque.classList.remove("hidden");
 
-    hideEmptyNodes();
+    // callMe(slug, 1);
   }
 };
