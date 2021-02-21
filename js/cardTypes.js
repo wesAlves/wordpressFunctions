@@ -23,21 +23,23 @@ const cardsFields = {
 };
 
 const createCardType = (category, productObject = cardsFields) => {
-  const getCardParentDiv = document.getElementById(category);
+  if (category !== "destaque") {
+    const getCardParentDiv = document.getElementById(category);
 
-  const card = document.createElement("div");
+    const card = document.createElement("div");
 
-  const cardLink = document.createElement("a");
-  cardLink.href = productObject.link;
+    const cardLink = document.createElement("a");
+    cardLink.href = productObject.link;
 
-  card.classList.add(`card_${category}`);
-  card.setAttribute("id", `${category}_${productObject.nome}`);
-  card.classList.add("ProductCardList");
+    card.classList.add(`card_${category}`);
+    card.setAttribute("id", `${category}_${productObject.nome}`);
+    card.classList.add("ProductCardList");
 
-  getCardParentDiv.appendChild(card);
-  card.appendChild(cardLink);
+    getCardParentDiv.appendChild(card);
+    card.appendChild(cardLink);
 
-  productCards(category, productObject);
+    productCards(category, productObject);
+  }
 };
 
 const productCards = (category, productObject) => {

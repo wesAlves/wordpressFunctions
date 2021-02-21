@@ -19,8 +19,6 @@ class pagination {
         this.pageNumber = maxQauntitie;
       }
     }
-    // callMe(category, this.pageNumber);
-    // console.log(this.pageNumber);
     createDivProdutc(this.category, this.pageNumber);
   }
 
@@ -34,8 +32,6 @@ class pagination {
         this.pageNumber = 1;
       }
     }
-    // createDivProdutc(this.category, this.pageNumber);
-    callMe(category, this.pageNumber);
-    // console.log(this.pageNumber);
+    createDivProdutc(this.category, this.pageNumber);
   };
 }

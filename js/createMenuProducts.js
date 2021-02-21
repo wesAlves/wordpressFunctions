@@ -3,10 +3,6 @@ const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
 
   categoriesNameForMenu.map((categoria, index) => {
     if (categoria !== "Destaque") {
-      const hideShowElement = document.getElementById(
-        `containerProdutos_${categoriesSlugForMenu[index]}`
-      );
-
       const titlePlace = document.getElementById(
         `containerProdutos_${categoriesSlugForMenu[index]}`
       );

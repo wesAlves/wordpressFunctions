@@ -1,7 +1,4 @@
 const showProductsList = (produtoCategorias, divName, page) => {
-  // const divProd = document.getElementById(divName);
-  // divProd.innerHTML = "";
-
   const paginationDisplay = document.querySelector(
     `.pagination_show_${divName}`
   );
@@ -53,6 +50,5 @@ const showProductsList = (produtoCategorias, divName, page) => {
     };
 
     createCardType(divName, produtoCategoriaOBJ);
-    // console.log(produtoCategoriaOBJ.link);
   });
 };
