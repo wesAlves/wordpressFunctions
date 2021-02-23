@@ -1,14 +1,16 @@
-const createDivProdutc = (productName, page) => {
+const createDivProduct = (productName, page) => {
   const getDivProductContainer = document.getElementById(
-    `containerProdutos_${productName}`
+    `containerProdutos_${productName.slug}`
   );
 
   const createProductCardDiv = document.createElement("div");
-  createProductCardDiv.classList.add(`${productName}`);
-  createProductCardDiv.id = `${productName}`;
+  createProductCardDiv.classList.add(`${productName.slug}`);
+  createProductCardDiv.id = `${productName.slug}`;
 
-  if (getDivProductContainer !== null) {
-    getDivProductContainer.appendChild(createProductCardDiv);
-    showProductsList(productName, productName, page);
-  }
+  getDivProductContainer.appendChild(createProductCardDiv);
+
+  // if (getDivProductContainer !== null) {
+  //   getDivProductContainer.appendChild(createProductCardDiv);
+  //   showProductsList(productName, productName.slug, page);
+  // }
 };

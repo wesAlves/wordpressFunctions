@@ -1,4 +1,21 @@
 //productCarousel
+.carousel {
+  width: calc(300px * 10);
+  transition: 0.5s ease-in-out;
+  background: red;
+
+  & > .ProductCardList {
+    width: 234px;
+    height: 268px;
+    background: #f8d845;
+  }
+
+  & > .ProductCardList > h3 {
+    font-size: 14px;
+    color: #5a5a5a;
+    margin-bottom: 0;
+  }
+}
 
 .carouselNext {
   position: absolute;
@@ -34,21 +51,4 @@
 .carouselPrev:hover {
   box-shadow: 0 0 8px #777;
   transition: 0.3s;
-}
-
-.carousel {
-  width: calc(300px * 10);
-  transition: 0.5s ease-in-out;
-}
-
-.carousel > .ProductCardList {
-  width: 234px;
-  height: 268px;
-  background: #f8d845;
-}
-
-.carousel > .ProductCardList > h3 {
-  font-size: 14px;
-  color: #5a5a5a;
-  margin-bottom: 0;
 }

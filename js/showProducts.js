@@ -1,20 +1,24 @@
-const showProductsList = (produtoCategorias, divName, page) => {
+const showProductsList = (produtoCategoriasOBJ, divName, page) => {
   const paginationDisplay = document.querySelector(
     `.pagination_show_${divName}`
   );
 
-  const qntProductCategoryPagination = JSON.parse(
-    localStorage.getItem(`@PontoDoMalte:${divName}-totalQauntitie`)
-  );
-  if (paginationDisplay !== null) {
-    paginationDisplay.innerHTML = `Monstrando grupo ${page} de ${Math.ceil(
-      qntProductCategoryPagination / 16
-    )}`;
-  }
+  // const qntProductCategoryPagination = JSON.parse(
+  //   localStorage.getItem(`@PontoDoMalte:${divName}-totalQauntitie`)
+  // );
+  // if (paginationDisplay !== null) {
+  //   paginationDisplay.innerHTML = `Monstrando grupo ${page} de ${Math.ceil(
+  //     qntProductCategoryPagination / 16
+  //   )}`;
+  // }
 
-  const getProdutoData = JSON.parse(
-    localStorage.getItem(`@PontoDoMalte:${produtoCategorias}-page${page}`)
-  );
+  // const getProdutoData = JSON.parse(
+  //   localStorage.getItem(`@PontoDoMalte:${produtoCategoriasOBJ}-page${page}`)
+  // );
+
+  const getProdutoData = produtoCategoriasOBJ;
+  // console.log(getProdutoData);
+  // return;
 
   getProdutoData.map((produtoCategoria) => {
     const produtoCategoriaOBJ = {
@@ -50,5 +54,6 @@ const showProductsList = (produtoCategorias, divName, page) => {
     };
 
     createCardType(divName, produtoCategoriaOBJ);
+    // console.log(divName, produtoCategoriaOBJ);
   });
 };
