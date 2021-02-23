@@ -46,8 +46,8 @@ const sessitionData = [];
 
         showProductsList(productsResponse, category.slug, 1);
       })();
+      createDivProduct(categoriesList[index], 1, productTotalPages);
     })();
-    createDivProduct(categoriesList[index], 1);
   });
 
   createMenuProducts(categoriesNameForMenu, categoriesSlugForMenu);

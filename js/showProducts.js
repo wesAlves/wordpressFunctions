@@ -1,7 +1,13 @@
 const showProductsList = (produtoCategoriasOBJ, divName, page) => {
-  const paginationDisplay = document.querySelector(
-    `.pagination_show_${divName}`
-  );
+  // const paginationDisplay = document.querySelector(
+  //   `.pagination_show_${divName}`
+  // );
+
+  // const createTextNodeShow = document.createTextNode(
+  //   `Mostrando ${page} de X páginas`
+  // );
+  // paginationDisplay.innerHTML = "";
+  // paginationDisplay.appendChild(createTextNodeShow);
 
   const getProdutoData = produtoCategoriasOBJ;
 

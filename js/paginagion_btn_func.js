@@ -7,6 +7,11 @@ class pagination {
   }
 
   nextPage() {
+    const paginationDisplay = document.querySelector(
+      `.pagination_show_${this.categoryName}`
+    );
+
+    console.log(this.categoryName, this.categoryId, this.totalPages);
     const getParentDiv = document.getElementById(this.categoryName);
 
     if (this.pageNumber < this.totalPages) {
@@ -26,10 +31,19 @@ class pagination {
       if (this.pageNumber >= this.totalPages) {
         this.pageNumber = this.totalPages;
       }
+      const createTextNodeShow = document.createTextNode(
+        `Mostrando ${this.pageNumber} de ${this.totalPages} páginas`
+      );
+      paginationDisplay.innerHTML = "";
+      paginationDisplay.appendChild(createTextNodeShow);
     }
   }
 
   prevPage = () => {
+    const paginationDisplay = document.querySelector(
+      `.pagination_show_${this.categoryName}`
+    );
+
     const getParentDiv = document.getElementById(this.categoryName);
     if (this.pageNumber >= 2) {
       getParentDiv.innerHTML = "";
@@ -49,6 +63,12 @@ class pagination {
       if (this.pageNumber === 0) {
         this.pageNumber = 1;
       }
+      const createTextNodeShow = document.createTextNode(
+        `Mostrando ${this.pageNumber} de ${this.totalPages} páginas`
+      );
+
+      paginationDisplay.innerHTML = "";
+      paginationDisplay.appendChild(createTextNodeShow);
     }
   };
 }
