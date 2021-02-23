@@ -1,9 +1,20 @@
-const showProductsList = (produtoCategoriasOBJ, divName, page) => {
+const showProductsList = (produtoCategorias, divName, page) => {
   const paginationDisplay = document.querySelector(
     `.pagination_show_${divName}`
   );
 
-  const getProdutoData = produtoCategoriasOBJ;
+  const qntProductCategoryPagination = JSON.parse(
+    localStorage.getItem(`@PontoDoMalte:${divName}-totalQauntitie`)
+  );
+  if (paginationDisplay !== null) {
+    paginationDisplay.innerHTML = `Monstrando grupo ${page} de ${Math.ceil(
+      qntProductCategoryPagination / 16
+    )}`;
+  }
+
+  const getProdutoData = JSON.parse(
+    localStorage.getItem(`@PontoDoMalte:${produtoCategorias}-page${page}`)
+  );
 
   getProdutoData.map((produtoCategoria) => {
     const produtoCategoriaOBJ = {

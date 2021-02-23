@@ -9,9 +9,9 @@
     <script src="./js/createMenuProducts.js"></script>
     <script src="./js/createDivProduct.js"></script>
     <script src="./js/showProducts.js"></script>
-    <!-- <script src="./js/toggleHidden.js"></script> -->
-    <!-- <script src="./js/paginagion_btn_func.js"></script> -->
     <script src="./js/cardTypes.js"></script>
+    <script src="./js/toggleHidden.js"></script>
+    <script src="./js/paginagion_btn_func.js"></script>
     <title>Document</title>
 </head>
 
@@ -20,15 +20,13 @@
     <ul id="menuProdutos">
     </ul>
     <div class='pagination_show_maltes'>
+        <button onclick="maltePagination.nextPage()">Next</button>
+        <button onclick="maltePagination.prevPage()">Prev</button>
     </div>
 
     <div class='' id="containerProdutos_maltes">
     </div>
 
-    <div class='pagination_show_destaque'>
-    </div>
-    <div class='' id="containerProdutos_destaque">
-    </div>
 
     <div class='pagination_show_servicos'>
     </div>
@@ -38,6 +36,11 @@
     <div class='pagination_show_lupulos'>
     </div>
     <div class='' id="containerProdutos_lupulos">
+    </div>
+
+    <div class='pagination_show_destaque'>
+    </div>
+    <div class='' id="containerProdutos_destaque">
     </div>
 
     <div class='pagination_show_leveduras'>
@@ -61,5 +64,9 @@
         display: none;
     }
 </style>
+
+<script>
+    const maltePagination = new pagination("maltes", 28, 3)
+</script>
 
 </html>

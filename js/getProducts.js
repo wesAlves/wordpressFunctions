@@ -11,7 +11,6 @@ const sessitionData = [];
   const categoriesSlugForMenu = [];
 
   const getCategories = await fetch(requestCategories);
-
   const categoriesList = await getCategories.json();
 
   await categoriesList.map((category, index) => {
@@ -29,13 +28,13 @@ const sessitionData = [];
     (async () => {
       const getProductsByCategory = await fetch(requestProducts);
 
-      const productTotalQauntitie = getProductsByCategory.headers.get(
-        "x-wp-total"
+      const productTotalPages = getProductsByCategory.headers.get(
+        "X-WP-TotalPages"
       );
 
       sessitionData.push({
         category: `${category.slug}`,
-        quantityItems: `${productTotalQauntitie}`,
+        quantityItems: `${productTotalPages}`,
       });
 
       (async () => {
@@ -44,12 +43,9 @@ const sessitionData = [];
         );
 
         const productsResponse = await getProductsByCategoryPagination.json();
-        // console.log(productsResponse);
 
         showProductsList(productsResponse, category.slug, 1);
-        // console.log(product);
       })();
-      return;
     })();
     createDivProduct(categoriesList[index], 1);
   });

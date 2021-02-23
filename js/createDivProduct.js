@@ -8,9 +8,4 @@ const createDivProduct = (productName, page) => {
   createProductCardDiv.id = `${productName.slug}`;
 
   getDivProductContainer.appendChild(createProductCardDiv);
-
-  // if (getDivProductContainer !== null) {
-  //   getDivProductContainer.appendChild(createProductCardDiv);
-  //   showProductsList(productName, productName.slug, page);
-  // }
 };
