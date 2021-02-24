@@ -1,4 +1,8 @@
-const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
+const createMenuProducts = (
+  categoriesNameForMenu,
+  categoriesSlugForMenu,
+  categoryID
+) => {
   const menuUL = document.getElementById("menuProdutos");
 
   categoriesNameForMenu.map((categoria, index) => {
@@ -39,6 +43,11 @@ const createMenuProducts = (categoriesNameForMenu, categoriesSlugForMenu) => {
 
       if (categoria !== null) {
         document.getElementById(categoria).onclick = function () {
+          getProductByCategory(
+            categoryID[index],
+            categoriesSlugForMenu[index],
+            1
+          );
           toggleHidden(categoria, categoriesSlugForMenu[index]);
         };
       }

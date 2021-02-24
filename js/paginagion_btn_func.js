@@ -11,7 +11,6 @@ class pagination {
       `.pagination_show_${this.categoryName}`
     );
 
-    console.log(this.categoryName, this.categoryId, this.totalPages);
     const getParentDiv = document.getElementById(this.categoryName);
 
     if (this.pageNumber < this.totalPages) {
@@ -48,7 +47,6 @@ class pagination {
     if (this.pageNumber >= 2) {
       getParentDiv.innerHTML = "";
       this.pageNumber--;
-      console.log(this.pageNumber);
 
       (async () => {
         const getProductsByCategoryPagination = await fetch(

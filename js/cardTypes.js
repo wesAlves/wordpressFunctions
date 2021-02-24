@@ -1,28 +1,4 @@
-const cardsFields = {
-  nome: "Banana",
-  preco_01: 10,
-  preco_02: 10,
-  preco_03: 10,
-  tipo_preco_01: "/ kg",
-  tipo_preco_02: "/ saca 25 kg",
-  tipo_preco_03: "outros",
-  potencial_malte: "10",
-  cor_malte: "10",
-  tipo_cor_malte: "10",
-  tipo_lupulo: "",
-  aplicacao_lupulo: "amargor",
-  pais_de_origem: "Brasil",
-  alphas: "10",
-  oleos: "0.3",
-  embalagem: "sachet",
-  tipo_de_fermentacao: "alta",
-  descricao: "Banana description",
-  laboratorio: "LevTeck",
-  foto: "",
-  link: "",
-};
-
-const createCardType = (category, productObject = cardsFields) => {
+const createCardType = (category, productObject) => {
   if (category !== "destaque") {
     const getCardParentDiv = document.getElementById(category);
 
@@ -40,6 +16,7 @@ const createCardType = (category, productObject = cardsFields) => {
 
     productCards(category, productObject);
   } else {
+    return;
     const getCardParentDiv = document.getElementById(category);
 
     const card = document.createElement("div");
